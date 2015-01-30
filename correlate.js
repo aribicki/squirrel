@@ -44,5 +44,31 @@ function phi(table) {
               (table[0] + table[2]));
 }
 
-print(tableFor("touched tree", JOURNAL));
-print(phi(tableFor("touched tree",JOURNAL)));
+//print(tableFor("touched tree", JOURNAL));
+//print(phi(tableFor("touched tree",JOURNAL)));
+print(tableFor("work", JOURNAL));
+
+
+for (var event in correlations) {
+  var correlation = correlations[event];
+  if (correlation > 0.1 || correlation < -0.1)
+    print(event + ": " + correlation);
+}
+
+function gatherCorrelations(journal) {
+  var phis = {};
+  for (var entry = 0; entry < journal.length; entry++) {
+    var events = journal[entry].events;
+    for (var i = 0; i < events.length; i++) {
+      var event = events[i];
+      if (!(event in phis))
+        phis[event] = phi(tableFor(event, journal));
+    }
+  }
+  return phis;
+}
+
+var correlations = gatherCorrelations(JOURNAL);
+
+for (var event in correlations)
+  console.log(event + ": " + correlations[event]);
