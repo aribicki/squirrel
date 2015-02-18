@@ -25,15 +25,15 @@ function hasEvent(event, entry) {
   return entry.events.indexOf(event) != -1;
 }
 
-function tableFor(event, journal) {
-  var table = [0, 0, 0, 0];
-  for (var i = 0; i < journal.length; i++) {
-    var entry = journal[i], index = 0;
-    if (hasEvent(event, entry)) index += 1;
-    if (entry.squirrel) index += 2;
-    table[index] += 1;
+function tableFor(event, journal) { // create function tableFor including event, journal
+  var table = [0, 0, 0, 0]; // set table to have four ints of zero
+  for (var i = 0; i < journal.length; i++) { // set var i = 0 then compare i to journal length and then add 1 to the i (index)
+    var entry = journal[i], index = 0; // take the var entry get journal i (index) then set it to 0 
+    if (hasEvent(event, entry)) index += 1; // if hasEvent contains event, entry get index and add 1 
+    if (entry.squirrel) index += 2;// if entry.squirrel then add 2 to index 
+    table[index] += 1; // take table index add 1 to it
   }
-  return table;
+  return table; // return table
 }
 
 function phi(table) {
